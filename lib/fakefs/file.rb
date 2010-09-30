@@ -15,6 +15,16 @@ module FakeFS
 
     FILE_CREATION_MODES = MODES - [READ_ONLY, READ_WRITE]
 
+    if RUBY_PLATFORM =~ /(win32|mingw32)/
+      MODE_BITMASK = RealFile::RDONLY   |
+                     RealFile::WRONLY   |
+                     RealFile::RDWR     |
+                     RealFile::APPEND   |
+                     RealFile::CREAT    |
+                     RealFile::EXCL     |
+                     RealFile::NONBLOCK |
+                     RealFile::TRUNC    
+    else
     MODE_BITMASK = RealFile::RDONLY   |
                    RealFile::WRONLY   |
                    RealFile::RDWR     |
@@ -25,6 +35,7 @@ module FakeFS
                    RealFile::TRUNC    |
                    RealFile::NOCTTY   |
                    RealFile::SYNC
+    end
 
     FILE_CREATION_BITMASK = RealFile::CREAT
 
