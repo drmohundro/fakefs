@@ -114,6 +114,7 @@ module FakeFS
       if RUBY_PLATFORM =~ /(win32|mingw32)/
         expanded.gsub('C:', '')
       end
+      expanded
     end
 
     def self.basename(*args)
