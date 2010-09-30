@@ -110,7 +110,10 @@ module FakeFS
     end
 
     def self.expand_path(*args)
-      RealFile.expand_path(*args)
+      expanded = RealFile.expand_path(*args)
+      if RUBY_PLATFORM =~ /(win32|mingw32)/
+        expanded.gsub('C:', '')
+      end
     end
 
     def self.basename(*args)
